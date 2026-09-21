@@ -1,4 +1,16 @@
 const comparison = document.querySelector('.comparison');
+
+document.querySelectorAll('.map-card a[aria-label]').forEach((link) => {
+  link.textContent = 'Open map';
+});
+
+const emojiLikeSymbols = /[\u2197\u2190\u2192\u2605\u2709]/g;
+const textWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+const textNodes = [];
+while (textWalker.nextNode()) textNodes.push(textWalker.currentNode);
+textNodes.forEach((node) => {
+  node.textContent = node.textContent.replace(emojiLikeSymbols, '');
+});
 const range = document.querySelector('#comparison-range');
 if (comparison && range) {
   const updateComparison = () => {
